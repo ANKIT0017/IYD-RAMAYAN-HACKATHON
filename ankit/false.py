@@ -4,8 +4,8 @@ from langchain_ollama import OllamaLLM
 from langchain.prompts import ChatPromptTemplate
 
 # Load Models
-aaditya = OllamaLLM(model="llama3:latest")  # Verifies if the statement is True/False/None
-ankur = OllamaLLM(model="llama3:latest")  # Generates False and None inputs
+ankur = OllamaLLM(model="llama3.2:latest")  # Generates False and None inputs
+aaditya = OllamaLLM(model="llama3.2:latest")  # Verifies if the statement is True/False/None
 
 # Define the prompt template for generating false or irrelevant inputs
 false_template = """
@@ -31,7 +31,7 @@ Answer:
 """
 
 # Load input dataset containing real statements (now with "instruction", "input", and "output")
-def load_real_shloka_data(filename="formatted_ramayana.json"):
+def load_real_shloka_data(filename=r"ankit\3aranya_kanda_NullRemoved.py"):
     if os.path.exists(filename):
         with open(filename, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -45,7 +45,7 @@ def load_existing_false_data(filename="false_none_dataset.json"):
             with open(filename, "r", encoding="utf-8") as f:
                 return json.load(f)
         except json.JSONDecodeError:
-            print("⚠️ Warning: JSON file is corrupted. Starting fresh.")
+            # print("⚠️ Warning: JSON file is corrupted. Starting fresh.")
             return []
     return []
 
@@ -63,7 +63,7 @@ def generate_false_none_data():
         # Step 1: Generate a false/none input
         try:
             false_none_input = ankur.invoke(false_template.format(shloka_text=original_input)).strip()
-            print(f"Generated False/None Input: {false_none_input}")
+            # print(f"Generated False/None Input: {false_none_input}")
         except Exception as e:
             print(f"Error generating false/none input: {e}")
             continue  # Skip if there was an error
@@ -71,7 +71,7 @@ def generate_false_none_data():
         # Step 2: Verify the generated input
         try:
             verification_result = aaditya.invoke(verify_template.format(shloka=false_none_input)).strip()
-            print(f"Verification Result: {verification_result}")
+            print(f"------  Verification Result: {verification_result}")
         except Exception as e:
             print(f"Error verifying input: {e}")
             continue  # Skip if there was an error
@@ -88,11 +88,12 @@ def generate_false_none_data():
         save_dataset(false_none_dataset)
 
 # Save dataset to JSON file
-def save_dataset(dataset, filename="false_none_dataset.json"):
+def save_dataset(dataset, filename=r"ankit\3aranya_kanda_false_none_dataset.json"):
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(dataset, f, indent=4, ensure_ascii=False)
-    print(f"✅ False/None dataset saved as {filename}")
+    # print(f"✅ False/None dataset saved as {filename}")
 
 # Run the data generation
 if __name__ == "__main__":
     generate_false_none_data()
+    print("Process Completed.")
