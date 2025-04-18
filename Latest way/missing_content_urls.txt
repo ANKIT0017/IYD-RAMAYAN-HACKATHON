@@ -1,0 +1,12 @@
+https://valmikiramayan.net/utf8/baala/sarga25/bala_25_frame.htm -> https://valmikiramayan.net/utf8/baala/sarga25/bala_5F25_frame.htm
+https://valmikiramayan.net/utf8/baala/sarga40/bala_40_frame.htm -> https://valmikiramayan.net/utf8/baala/sarga40/bala_5F40_frame.htm
+https://valmikiramayan.net/utf8/ayodhya/sarga25/ayodhya_25_frame.htm -> https://valmikiramayan.net/utf8/ayodhya/sarga25/ayodhya_5F25_frame.htm
+https://valmikiramayan.net/utf8/ayodhya/sarga40/ayodhya_40_frame.htm -> https://valmikiramayan.net/utf8/ayodhya/sarga40/ayodhya_5F40_frame.htm
+https://valmikiramayan.net/utf8/aranya/sarga25/aranya_25_frame.htm -> https://valmikiramayan.net/utf8/aranya/sarga25/aranya_5F25_frame.htm
+https://valmikiramayan.net/utf8/aranya/sarga40/aranya_40_frame.htm -> https://valmikiramayan.net/utf8/aranya/sarga40/aranya_5F40_frame.htm
+https://valmikiramayan.net/utf8/sundara/sarga25/sundara_25_frame.htm -> https://valmikiramayan.net/utf8/sundara/sarga25/sundara_5F25_frame.htm
+https://valmikiramayan.net/utf8/sundara/sarga40/sundara_40_frame.htm -> https://valmikiramayan.net/utf8/sundara/sarga40/sundara_5F40_frame.htm
+https://valmikiramayan.net/utf8/yuddha/sarga25/yuddha_25_frame.htm -> https://valmikiramayan.net/utf8/yuddha/sarga25/yuddha_5F25_frame.htm
+https://valmikiramayan.net/utf8/yuddha/sarga40/yuddha_40_frame.htm -> https://valmikiramayan.net/utf8/yuddha/sarga40/yuddha_5F40_frame.htm
+https://valmikiramayan.net/utf8/kish/sarga25/kishkindha_25_frame.htm -> https://valmikiramayan.net/utf8/kish/sarga25/kishkindha_5F25_frame.htm
+https://valmikiramayan.net/utf8/kish/sarga40/kishkindha_40_frame.htm -> https://valmikiramayan.net/utf8/kish/sarga40/kishkindha_5F40_frame.htm
