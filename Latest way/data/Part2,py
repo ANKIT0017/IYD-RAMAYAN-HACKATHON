@@ -1,0 +1,93 @@
+# what does this code does?
+# 1. Refactoring the values in the Book column i.e. Bala -> Bala, 2Aranya -> Aaranya only and so on...,
+# 2. Data cleaning, especially from the Comment column from the previous output data,
+# 3. Remove the Sanskrit and Transliteration column,
+# 4. New columns, English Translation = Translation (i.e. p.tat from the original html file) 
+#                                           + Comment (which is not present for all the shloks)
+
+
+# Yes, we could have achieved all these things in the previous code also, but as my elders said that
+#        "You do code not for you, but for other's"
+# i.e. seprating two logics first one is extracting all the data from the HTML file, 
+# and then picking up the required things from that file... 😛
+
+
+import csv
+import re
+
+# Input and output file paths
+input_csv = "Part1_Output_FullHTMLdata.csv"
+output_csv = "Part2_Cleaned_Output.csv"
+
+# Read original CSV
+with open(input_csv, 'r', encoding='utf-8') as infile:
+    reader = csv.reader(infile)
+    headers = next(reader)
+    rows = list(reader)
+
+# Identify column indexes
+book_idx = headers.index("Kanda/Book Name")
+sarga_idx = headers.index("Sarga/Chapter Number")
+verse_idx = headers.index("Shlok/Verse Number")
+trans_idx = headers.index("Translation")
+comment_idx = headers.index("Comment")
+
+
+# Step 2, Removing duplicate data from the Comment column, (due to certain flaws in previous code)
+# The problem was that, ()findNext function of BeautifulSoup library, find the next present value, and what we were facing was that
+
+# Suppose you are at 5th row for which no comment value is present in the html file, but while extracting value using the ()findNext or ()find, both of these return the next value present, i.e. we were jumping out of the current row's credential,
+
+# Yes, it is right that we put check clause that if the value if None/null it should return null, but wait dude how will it check that the there is no value, the ()find function of beautifull soup library, simply moves the next lines of html to extract value, and there are function fails,
+
+# And that is why i seperated this logic for the part2 of processing data, i.e. in this file
+cleaned_rows = []
+i = 0
+n = len(rows)
+
+while i < n:
+    current_comment = rows[i][comment_idx]
+    group = [rows[i]]
+    j = i + 1
+
+    while j < n and rows[j][comment_idx] == current_comment and current_comment != "":
+        group.append(rows[j])
+        j += 1
+
+    if current_comment and len(group) > 1:
+        for k in range(len(group) - 1):
+            group[k][comment_idx] = ""  # Clear duplicates
+
+    cleaned_rows.extend(group)
+    i = j
+
+final_rows = []
+
+for row in cleaned_rows:
+    # Step 1. Refactoring of book column (e.g., "2Ayodhya" -> "Ayodhya")
+    book_name = re.sub(r'^\d+', '', row[book_idx]).strip()
+
+    # Step4. Merge translation and comment into English Translation Column
+    translation = row[trans_idx].strip()
+    comment = row[comment_idx].strip()
+    english = translation if not comment else f"{translation}\n{comment}"
+
+    final_row = [
+        book_name,
+        row[sarga_idx],
+        row[verse_idx],
+        english
+    ]
+    final_rows.append(final_row)
+
+# Step3. Remove unwanted col. i.e. Sanskrit, Transliteration column
+final_headers = [
+    "Book Name", "Chapter Number", "Verse Number", "English Translation"
+]
+
+with open(output_csv, 'w', newline='', encoding='utf-8') as outfile:
+    writer = csv.writer(outfile)
+    writer.writerow(final_headers)
+    writer.writerows(final_rows)
+
+print(f"✅ Final cleaned file saved as '{output_csv}' (without Sanskrit & Transliteration columns).")
