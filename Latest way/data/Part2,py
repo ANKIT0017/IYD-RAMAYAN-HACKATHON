@@ -3,7 +3,6 @@
 # 2. Data cleaning, especially from the Comment column from the previous output data,
 # 3. Remove the Sanskrit and Transliteration column,
 # 4. New columns, English Translation = Translation (i.e. p.tat from the original html file) 
-#                                           + Comment (which is not present for all the shloks)
 
 
 # Yes, we could have achieved all these things in the previous code also, but as my elders said that
@@ -69,8 +68,9 @@ for row in cleaned_rows:
 
     # Step4. Merge translation and comment into English Translation Column
     translation = row[trans_idx].strip()
-    comment = row[comment_idx].strip()
-    english = translation if not comment else f"{translation}\n{comment}"
+    # comment = row[comment_idx].strip()
+    # english = translation if not comment else f"{translation}\n{comment}"
+    english = translation
 
     final_row = [
         book_name,
